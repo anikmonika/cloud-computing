@@ -8,11 +8,19 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "cookie-parser": "^1.4.7",
     "express": "^4.21.2",
     "firebase": "^11.4.0",
     "firebase-admin": "^13.2.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anikmonika/cloud-computing.git"
+  },
+  "bugs": {
+    "url": "https://github.com/anikmonika/cloud-computing/issues"
+  },
+  "homepage": "https://github.com/anikmonika/cloud-computing#readme",
+  "description": ""
 }
