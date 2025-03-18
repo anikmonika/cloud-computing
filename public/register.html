@@ -4,58 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css/register.css">
 </head>
 <body>
-    <div class="container mt-5">
-        <h1>Register</h1>
-        <form id="registerForm">
-            <input type="email" id="email" class="form-control my-2" placeholder="Email" required>
-            <input type="password" id="password" class="form-control my-2" placeholder="Password" required>
-            <button type="submit" class="btn btn-primary">Register</button>
-        </form>
-        <p class="mt-3">Sudah punya akun? <a href="login.html">Login</a></p>
-    </div>
+    <h2>Register</h2>
+    <form id="registerForm">
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button type="submit">Register</button>
+    </form>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+        import { auth } from "../firebase-config.js";
+        import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyDz8jQW3Sakya0ooJ_8nRTljzy9TOuFBzA",
-            authDomain: "list-app-519dc.firebaseapp.com",
-            databaseURL: "https://list-app-519dc-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "list-app-519dc",
-            storageBucket: "list-app-519dc.appspot.com",
-            messagingSenderId: "417968751161",
-            appId: "1:417968751161:web:814285dde524b544cdc3e8",
-            measurementId: "G-8Y2X08DXND"
-        };
+        document.addEventListener("DOMContentLoaded", function () {
+            const registerForm = document.getElementById("registerForm");
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
+            if (registerForm) {
+                registerForm.addEventListener("submit", async function (e) {
+                    e.preventDefault();
+                    const email = document.getElementById("email").value;
+                    const password = document.getElementById("password").value;
 
-        // Cek apakah user sudah login, jika ya langsung ke login.html
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                window.location.href = "login.html";
-            }
-        });
-
-        document.getElementById("registerForm").addEventListener("submit", function (e) {
-            e.preventDefault();
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
-
-            createUserWithEmailAndPassword(auth, email, password)
-                .then(() => {
-                    alert("Registrasi berhasil! Silakan login.");
-                    window.location.href = "login.html"; // Redirect ke login setelah register
-                })
-                .catch((error) => {
-                    console.error(error.code);
-                    alert("Registrasi Gagal: " + error.message);
+                    try {
+                        await signInWithEmailAndPassword(auth, email, password);
+                        alert("⚠️ Akun sudah terdaftar! Silakan login.");
+                        window.location.href = "login.html";
+                    } catch (error) {
+                        if (error.code === "auth/user-not-found") {
+                            try {
+                                await createUserWithEmailAndPassword(auth, email, password);
+                                alert("✅ Registrasi berhasil! Silakan login.");
+                                window.location.href = "login.html";
+                            } catch (regError) {
+                                alert("Registrasi Gagal: " + regError.message);
+                            }
+                        } else {
+                            alert("Registrasi Gagal: " + error.message);
+                        }
+                    }
                 });
+            }
         });
     </script>
 </body>

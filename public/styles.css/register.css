@@ -1,0 +1,89 @@
+/* register.css */
+
+/* Body styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fafafa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container for the register form */
+.register-container {
+    width: 100%;
+    max-width: 400px;
+    background-color: white;
+    border: 1px solid #dbdbdb;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/* Instagram logo text style */
+h2 {
+    text-align: center;
+    font-family: 'Lobster', sans-serif;
+    font-size: 2.5em;
+    color: #3897f0;
+    margin-bottom: 20px;
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="email"], input[type="password"] {
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #dbdbdb;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+button {
+    padding: 12px;
+    background-color: #3897f0;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #3180d4;
+}
+
+/* Footer with Login link */
+.footer {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.footer a {
+    color: #3897f0;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive styling for smaller screens */
+@media (max-width: 500px) {
+    .register-container {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 2em;
+    }
+}

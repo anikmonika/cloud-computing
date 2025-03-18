@@ -1,0 +1,158 @@
+/* Global styles */
+body {
+    background-color: #2196F3; /* Blue background */
+    color: #fff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Container that holds both Your Wishlist and Wishlist Items */
+.container {
+    background-color: #FFC0CB; /* Pink background for the container */
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%; /* Limit container width */
+    max-width: 1200px; /* Max width for larger screens */
+    display: flex; /* Flexbox to position content side by side */
+    gap: 20px; /* Space between the two sections */
+    justify-content: space-between;
+}
+
+/* Section for the form (left side) */
+#formSection {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    flex: 1; /* Allow the left section to take equal space */
+    min-width: 300px; /* Ensure it doesn't become too small on smaller screens */
+}
+
+/* Section for the wishlist items (right side) */
+#wishlistSection {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    flex: 1; /* Allow the right section to take equal space */
+    min-width: 300px; /* Ensure it doesn't become too small on smaller screens */
+    max-height: 500px;
+    overflow-y: auto; /* Allows scrolling if the list is long */
+}
+
+/* Style the h2 elements with boxes */
+h2 {
+    font-size: 2em;
+    font-weight: bold;
+    color: #000;
+    margin: 0;
+    padding: 10px;
+    background-color: #fff; /* White background for the boxes */
+    border: 2px solid #000; /* Black border around the box */
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+form input, form select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    background-color: #ff1493; /* Bright pink button */
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #ff69b4; /* Lighter pink when hovered */
+}
+
+/* Wishlist Item Styling */
+.wishlist-item {
+    background-color: #fff;
+    color: #000;
+    border-radius: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 15px;
+    border: 1px solid #ddd; /* Border to distinguish items */
+}
+
+.wishlist-item h5 {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.wishlist-item p {
+    margin: 5px 0;
+}
+
+.wishlist-item button {
+    margin-top: 10px;
+}
+
+/* Button styling */
+button.btn-warning {
+    background-color: #f39c12;
+    color: white;
+}
+
+button.btn-warning:hover {
+    background-color: #e67e22;
+}
+
+button.btn-danger {
+    background-color: #e74c3c;
+    color: white;
+}
+
+button.btn-danger:hover {
+    background-color: #c0392b;
+}
+
+/* Responsive design: Ensure layout adapts on smaller screens */
+@media screen and (max-width: 1024px) {
+    .container {
+        flex-direction: column; /* Stack the content vertically on smaller screens */
+        align-items: center;
+    }
+
+    #formSection, #wishlistSection {
+        width: 100%; /* Make each section take full width on smaller screens */
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #formSection, #wishlistSection {
+        width: 100%; /* Stack the sections on tablets */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #formSection, #wishlistSection {
+        width: 100%; /* Stack the sections on mobile */
+    }
+}
