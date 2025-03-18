@@ -1,158 +1,123 @@
-/* Global styles */
-body {
-    background-color: #2196F3; /* Blue background */
-    color: #fff;
-    font-family: Arial, sans-serif;
+/* General Styles */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+/* Set up the background image */
+body {
+    background-image: url('https://img.freepik.com/premium-photo/open-book-blue-table-with-blue-background_847439-9001.jpg'); /* Replace with your image URL */
+    background-size: cover;
+    background-position: center;
+    font-family: 'Arial', sans-serif;
+    color: #333;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     min-height: 100vh;
-    flex-direction: column;
-    gap: 20px;
 }
 
-/* Container that holds both Your Wishlist and Wishlist Items */
+/* Main container for the content */
 .container {
-    background-color: #FFC0CB; /* Pink background for the container */
-    padding: 20px;
-    border-radius: 10px;
-    width: 80%; /* Limit container width */
-    max-width: 1200px; /* Max width for larger screens */
-    display: flex; /* Flexbox to position content side by side */
-    gap: 20px; /* Space between the two sections */
-    justify-content: space-between;
-}
-
-/* Section for the form (left side) */
-#formSection {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    flex: 1; /* Allow the left section to take equal space */
-    min-width: 300px; /* Ensure it doesn't become too small on smaller screens */
-}
-
-/* Section for the wishlist items (right side) */
-#wishlistSection {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    flex: 1; /* Allow the right section to take equal space */
-    min-width: 300px; /* Ensure it doesn't become too small on smaller screens */
-    max-height: 500px;
-    overflow-y: auto; /* Allows scrolling if the list is long */
-}
-
-/* Style the h2 elements with boxes */
-h2 {
-    font-size: 2em;
-    font-weight: bold;
-    color: #000;
-    margin: 0;
-    padding: 10px;
-    background-color: #fff; /* White background for the boxes */
-    border: 2px solid #000; /* Black border around the box */
-    border-radius: 10px;
-    text-align: center;
-}
-
-/* Form styling */
-form {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    gap: 20px; /* Added gap between the two sections */
 }
 
-form input, form select {
+/* Left Container - Product Category Form */
+#wishlistFormContainer,
+#wishlistListContainer {
+    width: 50%; /* Both sections will have equal width of 50% */
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Fields */
+input, select {
+    width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 1em;
 }
 
-form button {
-    background-color: #ff1493; /* Bright pink button */
-    color: white;
+/* Submit Button */
+button {
+    width: 100%;
     padding: 10px;
     border: none;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1em;
     border-radius: 5px;
     cursor: pointer;
 }
 
-form button:hover {
-    background-color: #ff69b4; /* Lighter pink when hovered */
+button:hover {
+    background-color: #45a049;
 }
 
-/* Wishlist Item Styling */
+/* Wishlist Items */
 .wishlist-item {
-    background-color: #fff;
-    color: #000;
-    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 20px;
-    box-sizing: border-box;
-    width: 100%;
-    margin-bottom: 15px;
-    border: 1px solid #ddd; /* Border to distinguish items */
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .wishlist-item h5 {
     font-size: 1.2em;
-    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .wishlist-item p {
+    font-size: 1em;
     margin: 5px 0;
 }
 
-.wishlist-item button {
+/* Buttons for edit and delete */
+button.btn-warning, button.btn-danger {
     margin-top: 10px;
+    width: 48%; /* Buttons should be side by side */
+    padding: 8px;
+    font-size: 0.9em;
 }
 
-/* Button styling */
 button.btn-warning {
-    background-color: #f39c12;
-    color: white;
+    background-color: #ff9800;
 }
 
 button.btn-warning:hover {
-    background-color: #e67e22;
+    background-color: #fb8c00;
 }
 
 button.btn-danger {
-    background-color: #e74c3c;
-    color: white;
+    background-color: #f44336;
 }
 
 button.btn-danger:hover {
-    background-color: #c0392b;
+    background-color: #e53935;
 }
 
-/* Responsive design: Ensure layout adapts on smaller screens */
-@media screen and (max-width: 1024px) {
-    .container {
-        flex-direction: column; /* Stack the content vertically on smaller screens */
-        align-items: center;
-    }
-
-    #formSection, #wishlistSection {
-        width: 100%; /* Make each section take full width on smaller screens */
-    }
-
-    h2 {
-        margin-bottom: 20px;
-        text-align: center;
-    }
+/* Wishlist header */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2em;
+    color: white;
 }
 
-@media screen and (max-width: 768px) {
-    #formSection, #wishlistSection {
-        width: 100%; /* Stack the sections on tablets */
-    }
-}
-
-@media screen and (max-width: 480px) {
-    #formSection, #wishlistSection {
-        width: 100%; /* Stack the sections on mobile */
-    }
+h3 {
+    margin-top: 20px;
+    font-size: 1.5em;
+    color: white;
 }
