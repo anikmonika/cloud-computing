@@ -13,30 +13,58 @@
         <input type="password" id="password" placeholder="Password" required>
         <button type="submit">Login</button>
     </form>
+    <span id="error-message" style="color: red; font-size: 14px;"></span>
 
     <script type="module">
         import { auth } from "../firebase-config.js";
-        import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+        import { signInWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
-        document.addEventListener("DOMContentLoaded", function () {
-            const loginForm = document.getElementById("loginForm");
+        document.addEventListener("DOMContentLoaded", async function () {
+            // Check if the URL has a parameter oobCode (this is the verification link sent via email)
+            const urlParams = new URLSearchParams(window.location.search);
+            const oobCode = urlParams.get("oobCode");
 
-            if (loginForm) {
-                loginForm.addEventListener("submit", function (e) {
-                    e.preventDefault();
-                    const email = document.getElementById("email").value;
-                    const password = document.getElementById("password").value;
-
-                    signInWithEmailAndPassword(auth, email, password)
-                        .then(() => {
-                            alert("✅ Login successful!");
-                            window.location.href = "index.html";
-                        })
-                        .catch((error) => {
-                            alert("Login Gagal: " + error.message);
-                        });
-                });
+            if (oobCode) {
+                try {
+                    // Verify the email using the oobCode
+                    await applyActionCode(auth, oobCode);
+                    window.location.href = "login.html"; // Redirect to login page after verification
+                } catch (error) {
+                    alert("There was an error verifying the email: " + error.message);
+                }
             }
+
+            // If on the login page, proceed with the login process
+            const loginForm = document.getElementById("loginForm");
+            const errorMessage = document.getElementById("error-message");
+
+            loginForm.addEventListener("submit", async function (e) {
+                e.preventDefault();
+                const email = document.getElementById("email").value;
+                const password = document.getElementById("password").value;
+
+                try {
+                    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                    const user = userCredential.user;
+
+                    if (!user.emailVerified) {
+                        // If the email is not verified
+                        await sendEmailVerification(user); // Send a new verification email
+                        errorMessage.textContent = "Email is not verified. Please check your email.";
+                    } else {
+                        // Successfully logged in, redirect to index page
+                        window.location.href = "index.html"; // Redirect after successful login
+                    }
+                } catch (error) {
+                    if (error.code === "auth/user-not-found") {
+                        errorMessage.textContent = "Account not found. Please register first.";
+                    } else if (error.code === "auth/wrong-password") {
+                        errorMessage.textContent = "Wrong password. Please try again.";
+                    } else {
+                        errorMessage.textContent = "Login failed: " + error.message;
+                    }
+                }
+            });
         });
     </script>
 </body>
